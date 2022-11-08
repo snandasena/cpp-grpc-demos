@@ -12,6 +12,7 @@ FetchContent_Declare(
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(gRPC)
 
+# Hello world example
 set(sources generated/hello.grpc.pb.cc
         generated/hello.grpc.pb.h
         generated/hello.pb.h
@@ -29,3 +30,20 @@ add_executable(grpc-client
 target_link_libraries(grpc-client grpc++)
 
 
+# End Hello world example
+
+# Streaming example
+
+set(sources_streaming
+        generated/number.grpc.pb.cc
+        generated/number.grpc.pb.h
+        generated/number.pb.h
+        generated/number.pb.cc)
+
+add_executable(grpc-streaming-server
+        hello-world/streaming_server.cpp
+        ${sources_streaming})
+
+target_link_libraries(grpc-streaming-server grpc++)
+
+# End Streaming example
