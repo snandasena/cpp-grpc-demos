@@ -23,7 +23,7 @@
 static const char* NumberService_method_names[] = {
   "/NumberService/Next",
   "/NumberService/Range",
-  "/NumberService/SUm",
+  "/NumberService/Sum",
 };
 
 std::unique_ptr< NumberService::Stub> NumberService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -35,7 +35,7 @@ std::unique_ptr< NumberService::Stub> NumberService::NewStub(const std::shared_p
 NumberService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_Next_(NumberService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Range_(NumberService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_SUm_(NumberService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
+  , rpcmethod_Sum_(NumberService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
   {}
 
 ::grpc::Status NumberService::Stub::Next(::grpc::ClientContext* context, const ::NumberRequest& request, ::NumberResponse* response) {
@@ -77,20 +77,20 @@ void NumberService::Stub::async::Range(::grpc::ClientContext* context, const ::R
   return ::grpc::internal::ClientAsyncReaderFactory< ::RangeResponse>::Create(channel_.get(), cq, rpcmethod_Range_, context, request, false, nullptr);
 }
 
-::grpc::ClientWriter< ::SumRequest>* NumberService::Stub::SUmRaw(::grpc::ClientContext* context, ::SumResponse* response) {
-  return ::grpc::internal::ClientWriterFactory< ::SumRequest>::Create(channel_.get(), rpcmethod_SUm_, context, response);
+::grpc::ClientWriter< ::SumRequest>* NumberService::Stub::SumRaw(::grpc::ClientContext* context, ::SumResponse* response) {
+  return ::grpc::internal::ClientWriterFactory< ::SumRequest>::Create(channel_.get(), rpcmethod_Sum_, context, response);
 }
 
-void NumberService::Stub::async::SUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) {
-  ::grpc::internal::ClientCallbackWriterFactory< ::SumRequest>::Create(stub_->channel_.get(), stub_->rpcmethod_SUm_, context, response, reactor);
+void NumberService::Stub::async::Sum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) {
+  ::grpc::internal::ClientCallbackWriterFactory< ::SumRequest>::Create(stub_->channel_.get(), stub_->rpcmethod_Sum_, context, response, reactor);
 }
 
-::grpc::ClientAsyncWriter< ::SumRequest>* NumberService::Stub::AsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncWriterFactory< ::SumRequest>::Create(channel_.get(), cq, rpcmethod_SUm_, context, response, true, tag);
+::grpc::ClientAsyncWriter< ::SumRequest>* NumberService::Stub::AsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncWriterFactory< ::SumRequest>::Create(channel_.get(), cq, rpcmethod_Sum_, context, response, true, tag);
 }
 
-::grpc::ClientAsyncWriter< ::SumRequest>* NumberService::Stub::PrepareAsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncWriterFactory< ::SumRequest>::Create(channel_.get(), cq, rpcmethod_SUm_, context, response, false, nullptr);
+::grpc::ClientAsyncWriter< ::SumRequest>* NumberService::Stub::PrepareAsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncWriterFactory< ::SumRequest>::Create(channel_.get(), cq, rpcmethod_Sum_, context, response, false, nullptr);
 }
 
 NumberService::Service::Service() {
@@ -122,7 +122,7 @@ NumberService::Service::Service() {
              ::grpc::ServerContext* ctx,
              ::grpc::ServerReader<::SumRequest>* reader,
              ::SumResponse* resp) {
-               return service->SUm(ctx, reader, resp);
+               return service->Sum(ctx, reader, resp);
              }, this)));
 }
 
@@ -143,7 +143,7 @@ NumberService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status NumberService::Service::SUm(::grpc::ServerContext* context, ::grpc::ServerReader< ::SumRequest>* reader, ::SumResponse* response) {
+::grpc::Status NumberService::Service::Sum(::grpc::ServerContext* context, ::grpc::ServerReader< ::SumRequest>* reader, ::SumResponse* response) {
   (void) context;
   (void) reader;
   (void) response;

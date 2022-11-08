@@ -28,7 +28,7 @@ public:
         return Status::OK;
 
     }
-    Status SUm(ServerContext *context, ServerReader<SumRequest> *reader, SumResponse *response) override
+    Status Sum(ServerContext *context, ServerReader<SumRequest> *reader, SumResponse *response) override
     {
         uint64_t sum = 0;
         SumRequest request;

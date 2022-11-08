@@ -18,7 +18,7 @@ public:
 
     void Range(uint64_t min, uint64_t max, std::function<void(uint64_t)> onValue) const;
 
-    unsigned long long Sum(std::span<uint64_t> values) const;
+    uint64_t Sum(std::span<uint64_t> values) const;
 
 private:
 

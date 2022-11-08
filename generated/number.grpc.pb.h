@@ -49,14 +49,14 @@ class NumberService final {
     std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::RangeResponse>> PrepareAsyncRange(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::RangeResponse>>(PrepareAsyncRangeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriterInterface< ::SumRequest>> SUm(::grpc::ClientContext* context, ::SumResponse* response) {
-      return std::unique_ptr< ::grpc::ClientWriterInterface< ::SumRequest>>(SUmRaw(context, response));
+    std::unique_ptr< ::grpc::ClientWriterInterface< ::SumRequest>> Sum(::grpc::ClientContext* context, ::SumResponse* response) {
+      return std::unique_ptr< ::grpc::ClientWriterInterface< ::SumRequest>>(SumRaw(context, response));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>> AsyncSUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>>(AsyncSUmRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>> AsyncSum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>>(AsyncSumRaw(context, response, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>> PrepareAsyncSUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>>(PrepareAsyncSUmRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>> PrepareAsyncSum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::SumRequest>>(PrepareAsyncSumRaw(context, response, cq));
     }
     class async_interface {
      public:
@@ -64,7 +64,7 @@ class NumberService final {
       virtual void Next(::grpc::ClientContext* context, const ::NumberRequest* request, ::NumberResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void Next(::grpc::ClientContext* context, const ::NumberRequest* request, ::NumberResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void Range(::grpc::ClientContext* context, const ::RangeRequest* request, ::grpc::ClientReadReactor< ::RangeResponse>* reactor) = 0;
-      virtual void SUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) = 0;
+      virtual void Sum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -75,9 +75,9 @@ class NumberService final {
     virtual ::grpc::ClientReaderInterface< ::RangeResponse>* RangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request) = 0;
     virtual ::grpc::ClientAsyncReaderInterface< ::RangeResponse>* AsyncRangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncReaderInterface< ::RangeResponse>* PrepareAsyncRangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientWriterInterface< ::SumRequest>* SUmRaw(::grpc::ClientContext* context, ::SumResponse* response) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::SumRequest>* AsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::SumRequest>* PrepareAsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientWriterInterface< ::SumRequest>* SumRaw(::grpc::ClientContext* context, ::SumResponse* response) = 0;
+    virtual ::grpc::ClientAsyncWriterInterface< ::SumRequest>* AsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncWriterInterface< ::SumRequest>* PrepareAsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -98,14 +98,14 @@ class NumberService final {
     std::unique_ptr< ::grpc::ClientAsyncReader< ::RangeResponse>> PrepareAsyncRange(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReader< ::RangeResponse>>(PrepareAsyncRangeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriter< ::SumRequest>> SUm(::grpc::ClientContext* context, ::SumResponse* response) {
-      return std::unique_ptr< ::grpc::ClientWriter< ::SumRequest>>(SUmRaw(context, response));
+    std::unique_ptr< ::grpc::ClientWriter< ::SumRequest>> Sum(::grpc::ClientContext* context, ::SumResponse* response) {
+      return std::unique_ptr< ::grpc::ClientWriter< ::SumRequest>>(SumRaw(context, response));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>> AsyncSUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>>(AsyncSUmRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>> AsyncSum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>>(AsyncSumRaw(context, response, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>> PrepareAsyncSUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>>(PrepareAsyncSUmRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>> PrepareAsyncSum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::SumRequest>>(PrepareAsyncSumRaw(context, response, cq));
     }
     class async final :
       public StubInterface::async_interface {
@@ -113,7 +113,7 @@ class NumberService final {
       void Next(::grpc::ClientContext* context, const ::NumberRequest* request, ::NumberResponse* response, std::function<void(::grpc::Status)>) override;
       void Next(::grpc::ClientContext* context, const ::NumberRequest* request, ::NumberResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       void Range(::grpc::ClientContext* context, const ::RangeRequest* request, ::grpc::ClientReadReactor< ::RangeResponse>* reactor) override;
-      void SUm(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) override;
+      void Sum(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::ClientWriteReactor< ::SumRequest>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -130,12 +130,12 @@ class NumberService final {
     ::grpc::ClientReader< ::RangeResponse>* RangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request) override;
     ::grpc::ClientAsyncReader< ::RangeResponse>* AsyncRangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReader< ::RangeResponse>* PrepareAsyncRangeRaw(::grpc::ClientContext* context, const ::RangeRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientWriter< ::SumRequest>* SUmRaw(::grpc::ClientContext* context, ::SumResponse* response) override;
-    ::grpc::ClientAsyncWriter< ::SumRequest>* AsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncWriter< ::SumRequest>* PrepareAsyncSUmRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientWriter< ::SumRequest>* SumRaw(::grpc::ClientContext* context, ::SumResponse* response) override;
+    ::grpc::ClientAsyncWriter< ::SumRequest>* AsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncWriter< ::SumRequest>* PrepareAsyncSumRaw(::grpc::ClientContext* context, ::SumResponse* response, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_Next_;
     const ::grpc::internal::RpcMethod rpcmethod_Range_;
-    const ::grpc::internal::RpcMethod rpcmethod_SUm_;
+    const ::grpc::internal::RpcMethod rpcmethod_Sum_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -145,7 +145,7 @@ class NumberService final {
     virtual ~Service();
     virtual ::grpc::Status Next(::grpc::ServerContext* context, const ::NumberRequest* request, ::NumberResponse* response);
     virtual ::grpc::Status Range(::grpc::ServerContext* context, const ::RangeRequest* request, ::grpc::ServerWriter< ::RangeResponse>* writer);
-    virtual ::grpc::Status SUm(::grpc::ServerContext* context, ::grpc::ServerReader< ::SumRequest>* reader, ::SumResponse* response);
+    virtual ::grpc::Status Sum(::grpc::ServerContext* context, ::grpc::ServerReader< ::SumRequest>* reader, ::SumResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_Next : public BaseClass {
@@ -188,26 +188,26 @@ class NumberService final {
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_SUm : public BaseClass {
+  class WithAsyncMethod_Sum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_SUm() {
+    WithAsyncMethod_Sum() {
       ::grpc::Service::MarkMethodAsync(2);
     }
-    ~WithAsyncMethod_SUm() override {
+    ~WithAsyncMethod_Sum() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SUm(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
+    ::grpc::Status Sum(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestSUm(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::SumResponse, ::SumRequest>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestSum(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::SumResponse, ::SumRequest>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_Next<WithAsyncMethod_Range<WithAsyncMethod_SUm<Service > > > AsyncService;
+  typedef WithAsyncMethod_Next<WithAsyncMethod_Range<WithAsyncMethod_Sum<Service > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_Next : public BaseClass {
    private:
@@ -258,28 +258,28 @@ class NumberService final {
       ::grpc::CallbackServerContext* /*context*/, const ::RangeRequest* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_SUm : public BaseClass {
+  class WithCallbackMethod_Sum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_SUm() {
+    WithCallbackMethod_Sum() {
       ::grpc::Service::MarkMethodCallback(2,
           new ::grpc::internal::CallbackClientStreamingHandler< ::SumRequest, ::SumResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::SumResponse* response) { return this->SUm(context, response); }));
+                   ::grpc::CallbackServerContext* context, ::SumResponse* response) { return this->Sum(context, response); }));
     }
-    ~WithCallbackMethod_SUm() override {
+    ~WithCallbackMethod_Sum() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SUm(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
+    ::grpc::Status Sum(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::SumRequest>* SUm(
+    virtual ::grpc::ServerReadReactor< ::SumRequest>* Sum(
       ::grpc::CallbackServerContext* /*context*/, ::SumResponse* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_Next<WithCallbackMethod_Range<WithCallbackMethod_SUm<Service > > > CallbackService;
+  typedef WithCallbackMethod_Next<WithCallbackMethod_Range<WithCallbackMethod_Sum<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_Next : public BaseClass {
@@ -316,18 +316,18 @@ class NumberService final {
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_SUm : public BaseClass {
+  class WithGenericMethod_Sum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_SUm() {
+    WithGenericMethod_Sum() {
       ::grpc::Service::MarkMethodGeneric(2);
     }
-    ~WithGenericMethod_SUm() override {
+    ~WithGenericMethod_Sum() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SUm(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
+    ::grpc::Status Sum(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -373,22 +373,22 @@ class NumberService final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_SUm : public BaseClass {
+  class WithRawMethod_Sum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_SUm() {
+    WithRawMethod_Sum() {
       ::grpc::Service::MarkMethodRaw(2);
     }
-    ~WithRawMethod_SUm() override {
+    ~WithRawMethod_Sum() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SUm(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
+    ::grpc::Status Sum(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestSUm(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestSum(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
     }
   };
@@ -437,25 +437,25 @@ class NumberService final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_SUm : public BaseClass {
+  class WithRawCallbackMethod_Sum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_SUm() {
+    WithRawCallbackMethod_Sum() {
       ::grpc::Service::MarkMethodRawCallback(2,
           new ::grpc::internal::CallbackClientStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::grpc::ByteBuffer* response) { return this->SUm(context, response); }));
+                   ::grpc::CallbackServerContext* context, ::grpc::ByteBuffer* response) { return this->Sum(context, response); }));
     }
-    ~WithRawCallbackMethod_SUm() override {
+    ~WithRawCallbackMethod_Sum() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status SUm(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
+    ::grpc::Status Sum(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::SumRequest>* /*reader*/, ::SumResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::grpc::ByteBuffer>* SUm(
+    virtual ::grpc::ServerReadReactor< ::grpc::ByteBuffer>* Sum(
       ::grpc::CallbackServerContext* /*context*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>

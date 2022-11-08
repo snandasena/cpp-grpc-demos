@@ -12,6 +12,15 @@ FetchContent_Declare(
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(gRPC)
 
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 # Hello world example
 set(sources generated/hello.grpc.pb.cc
         generated/hello.grpc.pb.h
@@ -47,11 +56,10 @@ add_executable(grpc-streaming-server
 target_link_libraries(grpc-streaming-server grpc++)
 
 
-add_executable(grpc-streaming-client
-        hello-world/streaming_client.cpp
-        ${sources_streaming})
-
-target_link_libraries(grpc-streaming-client grpc++)
-
+add_executable(tests hello-world/streaming_tests.cpp hello-world/streaming_client.cpp ${sources_streaming})
+target_link_libraries(tests
+        grpc++
+        gtest
+        gmock)
 
 # End Streaming example

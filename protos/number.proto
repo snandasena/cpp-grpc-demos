@@ -4,7 +4,7 @@ service NumberService
 {
   rpc Next(NumberRequest) returns (NumberResponse);
   rpc Range(RangeRequest) returns (stream RangeResponse);
-  rpc SUm(stream SumRequest) returns (SumResponse);
+  rpc Sum(stream SumRequest) returns (SumResponse);
 }
 
 

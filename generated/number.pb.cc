@@ -171,7 +171,7 @@ const char descriptor_table_protodef_number_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "e\030\001 \001(\004\"\034\n\013SumResponse\022\r\n\005value\030\001 \001(\0042\206\001"
   "\n\rNumberService\022\'\n\004Next\022\016.NumberRequest\032"
   "\017.NumberResponse\022(\n\005Range\022\r.RangeRequest"
-  "\032\016.RangeResponse0\001\022\"\n\003SUm\022\013.SumRequest\032\014"
+  "\032\016.RangeResponse0\001\022\"\n\003Sum\022\013.SumRequest\032\014"
   ".SumResponse(\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_number_2eproto_once;

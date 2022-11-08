@@ -38,4 +38,35 @@ void StreamingClient::Range(uint64_t min, uint64_t max, std::function<void(uint6
     grpc::ClientContext ctx;
     auto reader = m_stub->Range(&ctx, request);
 
+    RangeResponse response;
+    while (reader->Read(&response))
+    {
+        onValue(response.value() * 2);
+    }
+
+    if (const auto status = reader->Finish(); !status.ok())
+    {
+        throw std::runtime_error{"Sum got an error from the service: " + status.error_message()};
+    }
+}
+
+uint64_t StreamingClient::Sum(std::span<uint64_t> values) const
+{
+    grpc::ClientContext ctx;
+    SumResponse response;
+    SumRequest request;
+
+    auto writer = m_stub->Sum(&ctx, &response);
+    for (auto i: values)
+    {
+        request.set_value(i);
+        writer->Write(request);
+    }
+
+    writer->WritesDone();
+    if (const auto status = writer->Finish(); !status.ok())
+    {
+        throw std::runtime_error{"Sum got an error from the service: " + status.error_message()};
+    }
+    return response.value();
 }
