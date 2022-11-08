@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(grpc_demos)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -45,5 +45,13 @@ add_executable(grpc-streaming-server
         ${sources_streaming})
 
 target_link_libraries(grpc-streaming-server grpc++)
+
+
+add_executable(grpc-streaming-client
+        hello-world/streaming_client.cpp
+        ${sources_streaming})
+
+target_link_libraries(grpc-streaming-client grpc++)
+
 
 # End Streaming example
