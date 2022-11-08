@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(grpc_demos)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -12,6 +12,16 @@ FetchContent_Declare(
 set(FETCHCONTENT_QUIET OFF)
 FetchContent_MakeAvailable(gRPC)
 
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Hello world example
 set(sources generated/hello.grpc.pb.cc
         generated/hello.grpc.pb.h
         generated/hello.pb.h
@@ -29,3 +39,27 @@ add_executable(grpc-client
 target_link_libraries(grpc-client grpc++)
 
 
+# End Hello world example
+
+# Streaming example
+
+set(sources_streaming
+        generated/number.grpc.pb.cc
+        generated/number.grpc.pb.h
+        generated/number.pb.h
+        generated/number.pb.cc)
+
+add_executable(grpc-streaming-server
+        hello-world/streaming_server.cpp
+        ${sources_streaming})
+
+target_link_libraries(grpc-streaming-server grpc++)
+
+
+add_executable(tests hello-world/streaming_tests.cpp hello-world/streaming_client.cpp ${sources_streaming})
+target_link_libraries(tests
+        grpc++
+        gtest
+        gmock)
+
+# End Streaming example
