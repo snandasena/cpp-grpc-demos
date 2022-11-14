@@ -70,7 +70,26 @@ TEST(StreamingClientTests, OnRangeShouldDoubleTheReceivedValue)
 
     EXPECT_CALL(*clientReaderMock, Finish())
             .WillOnce(Return(grpc::Status::OK));
+
+    auto serviceMock = std::make_unique<MockNumberServiceStub>();
+
+    RangeRequest actualRequest;
+    EXPECT_CALL(*serviceMock, RangeRaw(_, _)).
+            WillOnce(DoAll(SaveArg<1>(&actualRequest), Return(clientReaderMock)));
+
+    const StreamingClient client(std::move(serviceMock));
+
+    std::vector<uint64_t> actuals;
+    client.Range(0, 2, [&](uint64_t value)
+    {
+        actuals.push_back(value);
+    });
+
+    EXPECT_THAT(actualRequest.min(), Eq(0));
+    EXPECT_THAT(actualRequest.max(), Eq(2));
+    EXPECT_THAT(actuals, ElementsAre(2, 4));
 }
+
 
 int main(int argc, char **argv)
 {
