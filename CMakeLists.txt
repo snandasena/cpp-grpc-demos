@@ -28,13 +28,13 @@ set(sources generated/hello.grpc.pb.cc
         generated/hello.pb.cc)
 
 add_executable(grpc-server
-        hello-world/hello_server.cpp
+        grpc-demos/hello_server.cpp
         ${sources})
 target_link_libraries(grpc-server grpc++)
 
 
 add_executable(grpc-client
-        hello-world/hello_client.cpp
+        grpc-demos/hello_client.cpp
         ${sources})
 target_link_libraries(grpc-client grpc++)
 
@@ -50,13 +50,13 @@ set(sources_streaming
         generated/number.pb.cc)
 
 add_executable(grpc-streaming-server
-        hello-world/streaming_server.cpp
+        grpc-demos/streaming_server.cpp
         ${sources_streaming})
 
 target_link_libraries(grpc-streaming-server grpc++)
 
 
-add_executable(tests hello-world/streaming_tests.cpp hello-world/streaming_client.cpp ${sources_streaming})
+add_executable(tests grpc-demos/streaming_tests.cpp grpc-demos/streaming_client.cpp ${sources_streaming})
 target_link_libraries(tests
         grpc++
         gtest
