@@ -73,5 +73,6 @@ set(sources generated/snowflake.grpc.pb.cc
 
 add_executable(snowflake-server
         grpc-demos/snowflake_server.cpp
+        grpc-demos/snowflake.h
         ${sources})
 target_link_libraries(snowflake-server grpc++)

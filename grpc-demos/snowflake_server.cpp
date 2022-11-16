@@ -84,8 +84,15 @@ public:
             {
                 NextIdResponse response;
                 response.set_value(generator.next_id());
+                stream->Write(response);
             }
+
+            std::cout << "workerID " << *id << " has finished...\n";
+            m_workerIds.enqueue(*id);
+            return Status::OK;
         }
+
+        return Status{grpc::RESOURCE_EXHAUSTED, "Too many requests..."};
     }
 
 private:
@@ -93,3 +100,19 @@ private:
     size_t m_dataCenterId;
 
 };
+
+int main()
+{
+    SnowflakeServerImpl service{1};
+    ServerBuilder builder;
+    builder.AddListeningPort("localhost:50001", InsecureServerCredentials());
+    builder.RegisterService(&service);
+
+    auto server = builder.BuildAndStart();
+    std::cout << "The service is listening! Press enter to shutdown\n";
+    std::cin.get();
+    server->Shutdown();
+    server->Wait();
+
+    return 0;
+}
